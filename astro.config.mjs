@@ -5,14 +5,7 @@ import { defineConfig } from 'astro/config';
 export default defineConfig({});
 
 import { defineConfig } from 'astro/config';
-
-// https://astro.build/config
-export default defineConfig({
-
-});
-
-import { defineConfig } from 'astro/config';
-import vercel from '@astrojs/vercel/server'; // ⬅️ Paso 1: Importa el adaptador de Vercel
+import vercel from '@astrojs/vercel'; // ⬅️ ¡Así es como debe ser ahora!
 
 // https://astro.build/config
 export default defineConfig({
