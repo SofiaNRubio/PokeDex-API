@@ -1,70 +1,85 @@
 ---
-const { url } = Astro.props;
-
-let pokemonData = null;
-let imageUrl = '';
-let types = [];
-
-try {
-  const response = await fetch(url);
-  pokemonData = await response.json();
-  imageUrl = pokemonData.sprites.front_default;
-  types = pokemonData.types.map(typeInfo => typeInfo.type.name);
-} catch (error) {
-  console.error('Error fetching Pokémon data:', error);
-}
 ---
-
-<article class="pokemon-card">
-  {pokemonData ? (
-    <>
-      <img src={imageUrl} alt={`Imagen de ${pokemonData.name}`} class="pokemon-image" />
-      <h2 class="pokemon-name">{pokemonData.name}</h2>
-      <div class="pokemon-types">
-        {types.map(type => <span class={`pokemon-type type-${type}`}>{type}</span>)}
-      </div>
-    </> ) : (
-      <p>Cargando...</p>
-    )}
-</article>
+<div class="pokemon-card">
+    <img src="/placeholder.png" alt="Imagen de Pokémon" class="pokemon-image">
+    <h3 class="pokemon-name">Nombre de Pokémon</h3>
+    <div class="pokemon-types-container">
+        </div>
+</div>
 
 <style>
-	.pokemon-card {
-		border: 1px solid #ccc;
-		border-radius: 8px;
-		padding: 16px;
-		text-align: center;
-		background-color: rgb(243, 142, 142);
-		transition: transform 0.2s;
-	}
-	.pokemon-card:hover {
-		transform: scale(1.05);
-	}
-	.pokemon-name {
-		text-transform: capitalize;
-		margin: 10px 0;
-	}
-	.pokemon-image {
-		width: 120px;
-		height: 120px;
-	}
-	.pokemon-types {
-		display: flex;
-		justify-content: center;
-		gap: 5px;
-	}
-	.pokemon-type {
-		padding: 5px 10px;
-		border-radius: 5px;
-		color: rgb(255, 255, 255);
-		font-size: 0.8em;
-	}
+    .pokemon-card {
+        background-color: white;
+        border-radius: var(--border-radius);
+        box-shadow: var(--shadow);
+        padding: 20px;
+        text-align: center;
+        transition: var(--transition);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        border: 2px solid var(--secondary-color); 
+    }
 
-	.type-fire { background-color: #ff7c1f; }
-	.type-water { background-color: #5f81d1; }
-	.type-grass { background-color: #4aa71c; }
-	.type-normal { background-color: #858585; }
-	.type-flying { background-color: #715fa8; }
-	.type-poison { background-color: #89d655; }
-	.type-bug { background-color: #7eb820; }
+    .pokemon-card:hover {
+        transform: translateY(-8px) scale(1.02);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        border-color: var(--primary-color);
+    }
+
+    .pokemon-image {
+        width: 140px;
+        height: 140px;
+        object-fit: contain;
+        margin-bottom: 15px;
+    }
+
+    .pokemon-name {
+        font-family: 'Press Start 2P', cursive;
+        font-size: 1.2em;
+        margin-bottom: 10px;
+        color: var(--accent-color);
+        text-transform: capitalize;
+        white-space: nowrap; 
+        overflow: hidden; 
+        text-overflow: ellipsis;
+    }
+
+    .pokemon-types-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 8px;
+        margin-top: 10px;
+    }
+
+    .type-badge {
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-size: 0.85em;
+        font-weight: bold;
+        color: white;
+        text-transform: uppercase;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .type-normal { background-color: #A8A77A; }
+    .type-fire { background-color: #EE8130; }
+    .type-water { background-color: #6390F0; }
+    .type-grass { background-color: #7AC74C; }
+    .type-electric { background-color: #F7D02C; }
+    .type-ice { background-color: #96D9D6; }
+    .type-fighting { background-color: #C22E28; }
+    .type-poison { background-color: #A33EA1; }
+    .type-ground { background-color: #E2BF65; }
+    .type-flying { background-color: #A98FF3; }
+    .type-psychic { background-color: #F95587; }
+    .type-bug { background-color: #A6B91A; }
+    .type-rock { background-color: #B6A136; }
+    .type-ghost { background-color: #735797; }
+    .type-dragon { background-color: #6F35FC; }
+    .type-steel { background-color: #B7B7CE; }
+    .type-fairy { background-color: #D685AD; }
+    .type-dark { background-color: #705746; }
 </style>
