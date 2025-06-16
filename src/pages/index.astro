@@ -10,29 +10,13 @@ const allPokemon = data.results;
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width" />
-  <title>Mi PokéDex</title>
+  <title>PokeDex</title>
 
-  <form action="/search" method="GET" class="search-form">
-  <input type="text" name="q" placeholder="Buscar por nombre..." />
-  <button type="submit">Buscar</button>
-</form>
-
-<script>
-  // Pequeño script para manejar el envío
-  document.querySelector('.search-form').addEventListener('submit', function(event) {
-    event.preventDefault(); // Evitamos que la página recargue
-    const query = this.querySelector('input[name="q"]').value.toLowerCase().trim();
-    if (query) {
-      window.location.href = `/pokemon/${query}`;
-    }
-  });
-</script>
   <style is:global>
-
 
     body {
       font-family: system-ui, sans-serif;
-      background-color: #f4f4f4;
+      background-color: #ffe0e0;
       margin: 0;
     }
     main {
@@ -53,7 +37,7 @@ const allPokemon = data.results;
 </head>
 <body>
   <main>
-    <h1>PokéDex</h1>
+    <h1>PokeDex</h1>
     <div class="pokemon-grid">
       {allPokemon.map(pokemon => (
         <PokemonCard url={pokemon.url} />

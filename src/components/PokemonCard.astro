@@ -23,10 +23,9 @@ try {
       <div class="pokemon-types">
         {types.map(type => <span class={`pokemon-type type-${type}`}>{type}</span>)}
       </div>
-    </>
-  ) : (
-    <p>Cargando...</p>
-  )}
+    </> ) : (
+      <p>Cargando...</p>
+    )}
 </article>
 
 <style>
@@ -35,7 +34,7 @@ try {
 		border-radius: 8px;
 		padding: 16px;
 		text-align: center;
-		background-color: white;
+		background-color: rgb(243, 142, 142);
 		transition: transform 0.2s;
 	}
 	.pokemon-card:hover {
@@ -57,41 +56,15 @@ try {
 	.pokemon-type {
 		padding: 5px 10px;
 		border-radius: 5px;
-		color: white;
+		color: rgb(255, 255, 255);
 		font-size: 0.8em;
 	}
 
-	.type-fire { background-color: #F08030; }
-	.type-water { background-color: #6890F0; }
-	.type-grass { background-color: #78C850; }
-	.type-electric { background-color: #F8D030; }
-	.type-psychic { background-color: #F85888; }
-	.type-ice { background-color: #98D8D8; }
-	.type-dragon { background-color: #7038F8; }
-	.type-dark { background-color: #705848; }
-	.type-fairy { background-color: #EE99AC; }
-	.type-normal { background-color: #A8A878; }
-	.type-fighting { background-color: #C03028; }
-	.type-flying { background-color: #A890F0; }
-	.type-poison { background-color: #A040A0; }
-	.type-ground { background-color: #E0C068; }
-	.type-rock { background-color: #B8A038; }
-	.type-bug { background-color: #A8B820; }
-	.type-ghost { background-color: #705898; }
-	.type-steel { background-color: #B8B8D0; }
-
-
-  	.loader {
-	border: 4px solid #f3f3f3;
-	border-top: 4px solid #3498db;
-	border-radius: 50%;
-	width: 40px;
-	height: 40px;
-	animation: spin 2s linear infinite;
-	}
-
-	@keyframes spin {
-	0% { transform: rotate(0deg); }
-	100% { transform: rotate(360deg); }
-	}
+	.type-fire { background-color: #ff7c1f; }
+	.type-water { background-color: #5f81d1; }
+	.type-grass { background-color: #4aa71c; }
+	.type-normal { background-color: #858585; }
+	.type-flying { background-color: #715fa8; }
+	.type-poison { background-color: #89d655; }
+	.type-bug { background-color: #7eb820; }
 </style>
