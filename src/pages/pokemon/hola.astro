@@ -1,0 +1,12 @@
+---
+import PokemonCard from '../../components/PokemonCard.astro';
+const { name } = Astro.params;
+const pokemonUrl = `https://pokeapi.co/api/v2/pokemon/${name}`;
+---
+<html lang="es">
+  <body>
+    <h1>Resultados para: {name}</h1>
+    <PokemonCard url={pokemonUrl} />
+    <a href="/">Volver al inicio</a>
+  </body>
+</html>

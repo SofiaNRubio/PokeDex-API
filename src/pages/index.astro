@@ -1,11 +1,64 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+import PokemonCard from '../components/PokemonCard.astro'; 
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const response = await fetch('https://pokeapi.co/api/v2/pokemon?limit=20');
+const data = await response.json();
+const allPokemon = data.results;
 ---
 
-<Layout>
-	<Welcome />
-</Layout>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width" />
+  <title>Mi PokéDex</title>
+
+  <form action="/search" method="GET" class="search-form">
+  <input type="text" name="q" placeholder="Buscar por nombre..." />
+  <button type="submit">Buscar</button>
+</form>
+
+<script>
+  // Pequeño script para manejar el envío
+  document.querySelector('.search-form').addEventListener('submit', function(event) {
+    event.preventDefault(); // Evitamos que la página recargue
+    const query = this.querySelector('input[name="q"]').value.toLowerCase().trim();
+    if (query) {
+      window.location.href = `/pokemon/${query}`;
+    }
+  });
+</script>
+  <style is:global>
+
+
+    body {
+      font-family: system-ui, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+    }
+    main {
+      padding: 2rem;
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+
+    .pokemon-grid {
+      display: grid;
+
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>PokéDex</h1>
+    <div class="pokemon-grid">
+      {allPokemon.map(pokemon => (
+        <PokemonCard url={pokemon.url} />
+      ))}
+    </div>
+  </main>
+</body>
+</html>

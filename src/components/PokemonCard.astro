@@ -1,0 +1,97 @@
+---
+const { url } = Astro.props;
+
+let pokemonData = null;
+let imageUrl = '';
+let types = [];
+
+try {
+  const response = await fetch(url);
+  pokemonData = await response.json();
+  imageUrl = pokemonData.sprites.front_default;
+  types = pokemonData.types.map(typeInfo => typeInfo.type.name);
+} catch (error) {
+  console.error('Error fetching Pokémon data:', error);
+}
+---
+
+<article class="pokemon-card">
+  {pokemonData ? (
+    <>
+      <img src={imageUrl} alt={`Imagen de ${pokemonData.name}`} class="pokemon-image" />
+      <h2 class="pokemon-name">{pokemonData.name}</h2>
+      <div class="pokemon-types">
+        {types.map(type => <span class={`pokemon-type type-${type}`}>{type}</span>)}
+      </div>
+    </>
+  ) : (
+    <p>Cargando...</p>
+  )}
+</article>
+
+<style>
+	.pokemon-card {
+		border: 1px solid #ccc;
+		border-radius: 8px;
+		padding: 16px;
+		text-align: center;
+		background-color: white;
+		transition: transform 0.2s;
+	}
+	.pokemon-card:hover {
+		transform: scale(1.05);
+	}
+	.pokemon-name {
+		text-transform: capitalize;
+		margin: 10px 0;
+	}
+	.pokemon-image {
+		width: 120px;
+		height: 120px;
+	}
+	.pokemon-types {
+		display: flex;
+		justify-content: center;
+		gap: 5px;
+	}
+	.pokemon-type {
+		padding: 5px 10px;
+		border-radius: 5px;
+		color: white;
+		font-size: 0.8em;
+	}
+
+	.type-fire { background-color: #F08030; }
+	.type-water { background-color: #6890F0; }
+	.type-grass { background-color: #78C850; }
+	.type-electric { background-color: #F8D030; }
+	.type-psychic { background-color: #F85888; }
+	.type-ice { background-color: #98D8D8; }
+	.type-dragon { background-color: #7038F8; }
+	.type-dark { background-color: #705848; }
+	.type-fairy { background-color: #EE99AC; }
+	.type-normal { background-color: #A8A878; }
+	.type-fighting { background-color: #C03028; }
+	.type-flying { background-color: #A890F0; }
+	.type-poison { background-color: #A040A0; }
+	.type-ground { background-color: #E0C068; }
+	.type-rock { background-color: #B8A038; }
+	.type-bug { background-color: #A8B820; }
+	.type-ghost { background-color: #705898; }
+	.type-steel { background-color: #B8B8D0; }
+
+
+  	.loader {
+	border: 4px solid #f3f3f3;
+	border-top: 4px solid #3498db;
+	border-radius: 50%;
+	width: 40px;
+	height: 40px;
+	animation: spin 2s linear infinite;
+	}
+
+	@keyframes spin {
+	0% { transform: rotate(0deg); }
+	100% { transform: rotate(360deg); }
+	}
+</style>
